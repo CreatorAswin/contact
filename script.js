@@ -16,6 +16,7 @@ document.getElementById('date').addEventListener('change', function() {
 
 document.getElementById('myForm').addEventListener('submit', function(event) {
     event.preventDefault();
+
     var formData = {
         name: document.getElementById('name').value,
         address: document.getElementById('address').value,
@@ -24,19 +25,20 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
         day: document.getElementById('day').value
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbw6J_GcVq7XKPR58JXv7RIqysOG9W90iL3H2KttOQtGw_v4PjHZN6HKaxTgqyBbX_mG/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwHqSbGaujjc2q-tQRCBlBlQlvH4qgJT7VaMJ1oUp84L6RgAysa8tXKMHlNnDrcRGM3/exec', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         alert('Form submitted successfully!');
         document.getElementById('myForm').reset();
     })
     .catch(error => {
         console.error('Error:', error);
+        alert('An error occurred. Please try again.');
     });
 });
